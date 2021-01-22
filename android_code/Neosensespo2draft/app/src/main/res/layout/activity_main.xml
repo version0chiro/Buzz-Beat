@@ -7,11 +7,42 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif"
+        android:layout_width="389dp"
+        android:layout_height="78dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/hearbeat"
+        app:layout_constraintBottom_toTopOf="@+id/cli_response"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/trueInsightTag"
+        android:layout_width="91dp"
+        android:layout_height="43dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.684"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.639" />
+
     <TextView
         android:id="@+id/heartrateTag"
         android:layout_width="91dp"
         android:layout_height="43dp"
         android:visibility="gone"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.684"
@@ -24,6 +55,10 @@
         android:layout_width="91dp"
         android:layout_height="43dp"
         android:visibility="gone"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.684"
@@ -36,6 +71,10 @@
         android:layout_width="91dp"
         android:layout_height="43dp"
         android:visibility="gone"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.684"
@@ -48,6 +87,10 @@
         android:layout_width="91dp"
         android:layout_height="43dp"
         android:visibility="gone"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.684"
@@ -124,6 +167,7 @@
         android:text="Please connect your neosensory buzz by bringing it close and pressing the connect button!"
         android:textColor="#BCA7A7"
         android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -169,24 +213,40 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.287"
+        app:layout_constraintHorizontal_bias="0.315"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.552" />
+        app:layout_constraintVertical_bias="0.537" />
+
+    <TextView
+        android:id="@+id/label5"
+        android:layout_width="91dp"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:text="Insight:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#F8EEEE"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.315"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.64" />
 
     <TextView
         android:id="@+id/cli_response"
-        android:layout_width="208dp"
-        android:layout_height="119dp"
+        android:layout_width="250dp"
+        android:layout_height="68dp"
         android:gravity="center"
         android:textColor="#F8F0F0"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_bias="0.847" />
+        app:layout_constraintVertical_bias="0.972" />
 
     <Button
         android:id="@+id/button3"

@@ -31,8 +31,33 @@ import java.util.Arrays;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class MainActivity extends AppCompatActivity {
     private final String TAG = MainActivity.class.getSimpleName();
+
+//    spo2 - 80 to 100
+//    HR - 60-160
+//    HRV - 0-120 ms
+//    temp - 28-43 degC
+
+    //Ranges for all differnet motors
+    int spo2Start = 80;
+    int spo2End=100;
+
+    int hrStart = 60;
+    int hrEnd =160;
+
+    int hrvStart=20;
+    int hrvEnd = 120;
+
+    int tempStart = 28;
+
+    int tempEnd = 43;
+
+    // range for motor
+    int startY = 40;
+    int endY = 255;
 
     // UI components
     //before connect
@@ -40,12 +65,15 @@ public class MainActivity extends AppCompatActivity {
     TextView instruction;
     //after connect
     Button disconnect,start;
-    TextView label1,label2,label3,label4,cliOutput;
-    TextView spooTag,temperatureTag,heartrateTag,hrvTag;
-
+    TextView label1,label2,label3,label4,cliOutput,label5;
+    TextView spooTag,temperatureTag,heartrateTag,hrvTag,trueInsightTag;
+    GifImageView gif;
     // Constants
     private static final int ACCESS_LOCATION_REQUEST = 2;
     private static final int NUM_MOTORS = 4;
+
+    //variables for motor roations
+    int spooInt,tempInt,hrvInt,hrInt;
 
     // Access the library to leverage the Neosensory API
     private NeosensoryBlessed blessedNeo = null;
@@ -68,12 +96,18 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(s);
                 String spo2 = jsonObject.getString("spo2");
                 spooTag.setText(spo2);
+                spooInt = (int) Float.parseFloat(spo2);
                 String hr = jsonObject.getString("hr");
                 heartrateTag.setText(hr);
+                hrInt= (int) Float.parseFloat(hr);
                 String temperature = jsonObject.getString("temperature");
                 temperatureTag.setText(temperature);
+                tempInt = (int)Float.parseFloat(temperature);
                 String insight = jsonObject.getString("hrv");
                 hrvTag.setText(insight);
+                hrvInt = (int) Float.parseFloat(insight);
+                String trueInsight = jsonObject.getString("insight");
+                trueInsightTag.setText(trueInsight);
 
 
             } catch (JSONException e) {
@@ -127,14 +161,19 @@ public class MainActivity extends AppCompatActivity {
         label2=(TextView) findViewById(R.id.label2);
         label3=(TextView) findViewById(R.id.label3);
         label4 =(TextView) findViewById(R.id.label4);
+        label5 =(TextView) findViewById(R.id.label5);
         //textViews
         spooTag = (TextView) findViewById(R.id.spooTag);
         heartrateTag = (TextView) findViewById(R.id.heartrateTag);
         temperatureTag = (TextView) findViewById(R.id.temperatureTag);
         hrvTag = (TextView) findViewById(R.id.insightTag);
+        trueInsightTag = (TextView)findViewById(R.id.trueInsightTag);
         //button post connect
         disconnect = (Button) findViewById(R.id.button2);
         start = (Button) findViewById(R.id.button3);
+
+        //gif
+        gif = (GifImageView)findViewById(R.id.gif);
 
         displayInitialUI();
 
@@ -148,8 +187,26 @@ public class MainActivity extends AppCompatActivity {
         vibratingPattern= new VibratingPattern();
     }
 
+    public double round(double d){
+        return Math.floor(d+0.5);
+    }
 
-
+    public  int mapCustom(int yStart,int yend,int inputEnd,int input,int inputStart){
+//        double slope= 1.0* (yend-yStart)/(inputEnd-inputStart);
+//        double output = yStart + round(slope*(input-inputStart));
+        int input_range = inputEnd-inputStart;
+        int output_range = yend-yStart;
+        int output = (input-inputStart)*output_range/input_range + yStart;
+        if (output<0){
+            return 0;
+        }
+        else if(output>yend){
+            return yend;
+        }
+        else{
+            return (int) output;
+        }
+    }
     class VibratingPattern implements Runnable {
         private int minVibration = 40;
         private int currentVibration = minVibration;
@@ -164,18 +221,18 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("Tag",String.valueOf(motorID));
                     Log.i("max amp", String.valueOf(NeosensoryBlessed.MAX_VIBRATION_AMP));
 
-                    Thread.sleep(2500);
+                    Thread.sleep(1000);
                     WeatherDownloader task = new WeatherDownloader();
-
                     task.execute("https://spo2-registration.herokuapp.com/neoSenseSender");
+                    int spo2M=mapCustom(minVibration,endY,spo2End,spooInt,spo2Start);
+                    int hrvM=mapCustom(minVibration,endY,hrvEnd,hrvInt,hrvStart);
+                    int tempM=mapCustom(minVibration,endY,tempEnd,tempInt,tempStart);
+                    int hrM=mapCustom(minVibration,endY,hrEnd,hrInt,hrStart);
 
-                    int[] motorPattern = new int[4];
-                    motorPattern = new int[]{10, 40, 0, 100};
+                    int[] motorPattern = new int[]{spo2M,hrvM, tempM,hrM};
 //                    motorPattern[motorID] = currentVibration;
                     blessedNeo.vibrateMotors(motorPattern);
-                    motorID = (motorID + 1) % 3;
                     Log.i("array", Arrays.toString(motorPattern));
-                    currentVibration = (currentVibration + 1) % NeosensoryBlessed.MAX_VIBRATION_AMP;
                     if (currentVibration == 0) {
                         currentVibration = minVibration;
                     }
@@ -271,14 +328,17 @@ public class MainActivity extends AppCompatActivity {
     public void displayVibrateButton() {
         connect.setVisibility(View.GONE);
         cliOutput.setVisibility(View.VISIBLE);
+        gif.setVisibility(View.VISIBLE);
         label1.setVisibility(View.VISIBLE);
         label2.setVisibility(View.VISIBLE);
         label3.setVisibility(View.VISIBLE);
         label4.setVisibility(View.VISIBLE);
+        label5.setVisibility(View.VISIBLE);
         spooTag.setVisibility(View.VISIBLE);
         heartrateTag.setVisibility(View.VISIBLE);
         hrvTag.setVisibility(View.VISIBLE);
         temperatureTag.setVisibility(View.VISIBLE);
+        trueInsightTag.setVisibility(View.VISIBLE);
         instruction.setVisibility(View.GONE);
     }
 
@@ -305,10 +365,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void displayReconnectUI() {
         cliOutput.setVisibility(View.GONE);
+        gif.setVisibility(View.GONE);
         label1.setVisibility(View.GONE);
         label2.setVisibility(View.GONE);
         label3.setVisibility(View.GONE);
         label4.setVisibility(View.GONE);
+        label5.setVisibility(View.GONE);
+        spooTag.setVisibility(View.GONE);
+        heartrateTag.setVisibility(View.GONE);
+        hrvTag.setVisibility(View.GONE);
+        temperatureTag.setVisibility(View.GONE);
+        trueInsightTag.setVisibility(View.GONE);
 
         disconnect.setVisibility(View.GONE);
         start.setVisibility(View.GONE);

@@ -76,6 +76,7 @@ if (!process.argv[2]) {
 }
 
 let features = process.argv[2];
+console.log(features.length);
 if (fs.existsSync(features)) {
     features = fs.readFileSync(features, 'utf-8');
 }
