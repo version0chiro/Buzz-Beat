@@ -37,7 +37,7 @@ The Project is divided into four different parts and sectors and they have been 
 <li><a href="https://github.com/version0chiro/Contactless_stethoscope/nodeMcu_Code/FullTestWithPost_22_1">NodeMCU-Sensors</a></li>
 <li><a href="https://github.com/version0chiro/Contactless_stethoscope/edgeImpulse">Machine Learning with Edge Impulse</a></li>
 </ol>
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
 
 
 The project is aimed towards the doctors that want to get vital health related data from the paitents without having to be in contact or in a range. With the working of buzz-beat, we have made a wireless all over the globe execution for capturing and responding to sensor data for the following:
