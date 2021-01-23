@@ -110,84 +110,40 @@ This value is also added to the JSON on the node server and sent to the final st
 
 <!-- Android pics here -->
 
+The Buzz-Beat App has been made using Android Studio with Java as the backend language. The app works on two stages, the first stage is like a landing page which is displayed when the app is open, a connect button is presented to the user so that he can connect to the buzz when brought near the phone. 
 
-`version0chiro`, `Contactless_stethoscope`, `twitter_handle`, `email`, `project_title`, `project_description`
+For the connection between android app and neosensory buzz, the SDK is built on top of the bluetooth blessed library which is a light-weight low energy based bluetooth utility that made a lot of heavy work handy. 
+
+Once connected, the app works with GET request on the custom node.js server, after every 1 second interval a GET request is processed and the JSON at server is collected and displayed as text-view onto the App's screen. The value received is somewhat like this:
+<!-- recieved JSON pic here -->
+
+Out of these, the first four are the data that needs to be sent to the buzz on the hand of the doctor/individual wearing it. The values are mapped using a custom range mapping formula that is explained excelenty on this stackoverflow answer:
+<a href="https://stackoverflow.com/questions/5731863/mapping-a-numeric-range-onto-another"> HERE </a>
+
+In basic terms, those are made mapped inrange to 40-255 which is the range for the neosensory buzz motors to work upon. And finally these values are sent to the buzz via bluetooth, in realtime they are updated and sent over in quick intervals and the insight printed from the EdgeImpulse model is also printed here.
+
+
 
 
 ### Built With
 
-* []()
-* []()
-* []()
+* [Arduino](https://www.arduino.cc/)
+* [Node.js](https://nodejs.org/en/)
+* [Android Studio](https://developer.android.com/studio)
+* [Edge Impulse](https://www.edgeimpulse.com/)
 
 
 
-<!-- GETTING STARTED -->
-## Getting Started
-
-To get a local copy up and running follow these simple steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/version0chiro/Contactless_stethoscope.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
 
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/version0chiro/Contactless_stethoscope/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
+Sachin Singh Bhadoriya - [@link](https://www.linkedin.com/in/sachin-singh-bhadoriya-46b18219a/) - sachinsinghbhadoriya1@gmail.com
 
 Project Link: [https://github.com/version0chiro/Contactless_stethoscope](https://github.com/version0chiro/Contactless_stethoscope)
 
@@ -196,9 +152,9 @@ Project Link: [https://github.com/version0chiro/Contactless_stethoscope](https:/
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* []()
-* []()
-* []()
+* [TheBluePhoenix10](https://github.com/TheBluePhoenix10)
+* [Neo-sense Devs](https://github.com/neosensory)
+
 
 
 
