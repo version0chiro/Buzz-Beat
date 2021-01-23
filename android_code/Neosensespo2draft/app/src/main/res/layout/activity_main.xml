@@ -136,7 +136,7 @@
         android:layout_width="209dp"
         android:layout_height="70dp"
         android:gravity="center"
-        android:text="Work-Safe"
+        android:text="Buzz-Beat"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#D8C9BF"
         android:textSize="30sp"
