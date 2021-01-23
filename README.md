@@ -100,6 +100,7 @@ To expand the project into a worldwide access working we choose the Android SDK 
 
 <!-- Json themed image of data -->
 <img src="images/json2.png"> </img>
+
 The data on the devices was JSONified on device itself and was sent as a post request to our custom webserver made with Node.js and express, hosted on heroku
 
 This server assignes the JSON recieved into a local JSON and then extract raw data for the Heart-Rate aswell as the Temperature, this raw data than undergoes into the WAassemply model made using edgeImpulse for Node.js
@@ -120,6 +121,7 @@ The Buzz-Beat App has been made using Android Studio with Java as the backend la
 
 For the connection between android app and neosensory buzz, the SDK is built on top of the bluetooth blessed library which is a light-weight low energy based bluetooth utility that made a lot of heavy work handy. 
 <img src="images/app2.jpeg"></img>
+
 Once connected, the app works with GET request on the custom node.js server, a
 fter every 1 second interval a GET request is processed and the JSON at server is collected and displayed as text-view onto the App's screen. The value received is somewhat like this:
 
