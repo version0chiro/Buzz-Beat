@@ -106,12 +106,12 @@ The data on the devices was JSONified on device itself and was sent as a post re
 This server assignes the JSON recieved into a local JSON and then extract raw data for the Heart-Rate aswell as the Temperature, this raw data than undergoes into the WAassemply model made using edgeImpulse for Node.js
 
 <!-- Edge Impulse pic -->
-<img src="images/trained_hr.png" width="300"></img>
+<img src="images/Screenshot2.png" width="300"></img>
 
 The models were trained with 2 dense layers and 
 data was processed using dsp processing, the processing done was to insure that all axises are properly being fed into the model, rather than conventional ways of thresholding this values, using edgeImpulse we were able to make it dependent on a pattern instead.
 
-<img src="images/impulseDesign.png"></img>
+<img src="images/Screenshot.png"></img>
 
 Thus the value was not gonna be same for everyone but any kind of movement which was out of the ordinary was reported back as high temperature or high hear rate!
 
